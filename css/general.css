@@ -1,0 +1,399 @@
+/* 
+
+--- 01 TYPOGRAPHY SYSTEM 
+
+- Font sizes (px):
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+- Font weights:
+Default: 400
+Medium: 500
+Semi-bold: 600
+Bold: 700
+
+- Line heights:
+Default: 1
+Small: 1.05
+Medium: 1.2
+Paragraph default: 1.6
+Large: 1.8
+
+- Letter spacing
+-0.5px
+0.75px
+
+
+--- 02 COLORS
+
+- Primary: #e67e22
+
+- Tints (lighter):
+#fdf2e9
+#fae5d3
+#eb984e
+
+- Shades (darker): 
+#cf711f
+#45260a
+
+- Accents:
+- Greys:
+
+#888
+#767676 (lightest grey allowed on #fff)
+#6f6f6f (lightest grey allowed on #fdf2e9)
+#555
+#333
+
+--- 05 SHADOWS
+0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+
+--- 06 BORDER-RADIUS
+
+Default: 9px;
+Medium: 11px
+
+--- 07 WHITESPACE
+
+- Spacing system (px):
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+*/
+
+*
+{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root
+{
+    --color-primary: #e67e22;
+    --color-primary-tint: #fdf2e9;
+    --color-primary-shade: #cf711f;
+    --grey-light: #555;
+    --grey-dark: #333;
+}
+
+html
+{
+    /* 10px / 16px = 0.625 = 62.5% */
+    /* Percentage of user's browser font-size setting */
+    font-size: 62.5%;
+
+    /* * Ei x-skrollausta */
+    overflow-x: hidden;
+
+    /* * Firefox ja Chrome smooth scroll */
+    scroll-behavior: smooth;
+}
+
+body
+{
+    /* Vähän pyöreämpi fontti jotta sivu olisi lämpimämpi */
+    font-family: "Rubik", sans-serif;
+
+    /* Resetting line-height and font-weight */
+    line-height: 1;
+    font-weight: 400;
+
+    /* Base grey color */
+    color: var(--grey-light);
+
+    /* * Ei x-skrollausta */
+    /* * Only works if there is nothing absolutely positioned in relation the body */
+    overflow-x: hidden;
+}
+
+/* ************************ */
+/* GENERAL REUSABLE COMPONENTS */
+/* ************************ */
+
+.container
+{
+    max-width: 120rem;
+
+    /* Keskittää sisällön antamalla molemmille puolille saman marginin */
+    margin: 0 auto;
+
+    /* Jottei sisältö ole reunassa kiinni */
+    padding: 0 3.2rem;
+}
+
+.grid
+{
+    display: grid;
+    column-gap: 6.4rem;
+    row-gap: 9.6rem;
+
+    /* margin-bottom: 9.6rem; */
+}
+
+/* .grid:last-child
+{
+    margin-bottom: 0;
+} */
+
+/* * Sectionin viimeinen grid saa vaan marginin */
+.grid:not(:last-child)
+{
+    margin-bottom: 9.6rem;
+}
+
+.grid--2-cols
+{
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--3-cols
+{
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--4-cols
+{
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid--5-cols
+{
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.grid--center-y
+{
+    align-items: center;
+}
+
+.heading-primary,
+.heading-secondary,
+.heading-tertiary
+{
+    /* Otsikkojen koko +50px ja bold +600*/
+    font-weight: 700;
+
+    /* Otsikossa kirjaimet lähempänä */
+    letter-spacing: -0.5px;
+
+    color: var(--grey-dark);
+}
+
+.heading-primary
+{
+    /* Otsikkojen koko +50px ja bold +600*/
+    font-size: 5.2rem;
+
+    /* Isolle tekstille alle 1.5 */
+    line-height: 1.05;
+
+    /* Otsikko ja teksti kuuluu yhteen ei hirveää marginia */
+    margin-bottom: 3.2rem; 
+}
+
+.heading-secondary
+{
+    /* Yhden pienempi heading-primarysta */
+    font-size: 4.4rem;
+
+    /* Isolle tekstille alle 1.5 */
+    line-height: 1.2;
+
+    /* Tilaa heading alle */
+    margin-bottom: 9.6rem;
+}
+
+.heading-tertiary
+{
+    font-size: 3rem;
+
+    line-height: 1.2;
+
+    margin-bottom: 3.2rem;
+}
+
+/* Caps Lock otsikko */
+.subheading
+{
+    /* Koska käytettiin span */
+    display: block;
+
+    font-size: 1.6rem;
+    font-weight: 500;
+
+    /* Näyttää paremmalta kun antaa tilaa kirjaimille */
+    letter-spacing: 0.75px;
+
+    color: var(--color-primary-shade);
+
+    text-transform: uppercase;
+
+    margin-bottom: 1.6rem;
+}
+
+.btn,
+.btn:link,
+.btn:visited
+{
+    /* Jotta padding toimii */
+    display: inline-block;
+
+    text-decoration: none;
+    font-size: 2rem;
+
+    /* Nappiteksti näyttää kivemmalta */
+    font-weight: 600;
+
+    /* Sivuille tuplat */
+    padding: 1.6rem 3.2rem;
+
+    /* Reunoja pois */
+    border-radius: 9px;
+
+    /* .btn tyylit */
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+
+    /* * Transition between two values with an animation */
+    /* * Vaihda kahden arvon välillä animaatiolla */
+    /* * 0.3s yleinen */
+    transition: all 0.3s;
+
+    /* * Tämä huono koska box-shadow ei ole mukana (reuna)  */
+    /* transition: background-color 0.3s; */
+}
+
+.btn--full:link,
+.btn--full:visited
+{
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+.btn--full:hover,
+.btn--full:active
+{
+    background-color: var(--color-primary-shade);
+}
+
+.btn--outline:link,
+.btn--outline:visited
+{
+    background-color: #fff;
+    color: var(--grey-dark);
+}
+
+.btn--outline:hover,
+.btn--outline:active
+{
+    background-color: var(--color-primary-tint);
+
+    /* Lisää borderin ulkopuolelle jolloin muutkin elementit liikkuu */
+    /* border: 3px solid #fff; */
+
+    /* Trick to add border inside */
+    box-shadow: inset 0 0 0 3px #fff;
+}
+
+.link:link,
+.link:visited
+{
+    display: inline-block;
+
+    color: var(--color-primary);
+    text-decoration: none;
+
+    /* * Alleviiva linkille */
+    /* * currentColor on automaattinen */
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+
+    transition: all 0.3s;
+}
+
+.link:hover,
+.link:active
+{
+    color: var(--color-primary-shade);
+
+    /* * Border muuttuu näkymättömäksi */
+    border-bottom: 1px solid transparent;
+}
+
+.btn--form
+{
+    background-color: #45260a;
+    color: var(--color-primary-tint);
+    align-self: end;
+
+    padding: 1.2rem;
+
+}
+
+.btn--form:hover
+{
+    background-color: #fff;
+    color: #555;
+}
+
+.list
+{
+    /* Tilaa listan itemeiden välille */
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+
+    list-style: none;
+
+    line-height: 1.2;
+}
+
+.list-item
+{
+    /* Tilaa ikonin ja tekstin väliin */
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+
+    /* Käytetty paljon */
+    font-size: 1.8rem;
+}
+
+.list-icon
+{
+    width: 3rem;
+    height: 3rem;
+    color: var(--color-primary);
+}
+
+*:focus
+{
+    outline: none;
+    /* outline: 4px dotted #e67e22;
+    outline-offset: 8px; */
+    box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.527);
+}
+
+/* ! HELPER/SETTINGS CLASSEES */
+
+.margin-right-sm
+{
+    margin-right: 1.6rem;
+}
+
+.margin-bottom-md
+{
+    margin-bottom: 4.8rem !important;
+}
+
+.center-text
+{
+    text-align: center;
+}
+
+/* Jotta strong ei olisi niin vahva */
+strong
+{
+    font-weight: 500;
+}
